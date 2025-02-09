@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Gameplay.UI
 {
-    public class HeroUIViewModel:MonoBehaviour
+    public class HeroUIView:MonoBehaviour
     {
         private HeroViewModel _heroViewModel;
         [SerializeField]private Slider healthSlider;
@@ -40,7 +40,8 @@ namespace Gameplay.UI
         private void UpdateStaminaBar(float value)
         {
             staminaSlider.value = value/100f;
-            staminaText.text = _heroViewModel.Stamina.ToString();
+            int staminaToDisplay = (int)value;
+            staminaText.text = staminaToDisplay.ToString();
         }
     }
 }

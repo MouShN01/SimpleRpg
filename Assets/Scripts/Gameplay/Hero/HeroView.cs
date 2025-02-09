@@ -29,8 +29,7 @@ namespace Hero
 
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                _viewModel.IsSprinting.Value = true;
-                _viewModel.UseStamina();
+                _viewModel.Run();
             }
             else
             {

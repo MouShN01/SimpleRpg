@@ -26,8 +26,8 @@ namespace Hero
         private float normalSpeed = 5.0f;
         private float sprintSpeed = 10.0f;
         
-        private float staminaCost = 1.0f;
-        private float staminaRegen = 2.0f;
+        private float staminaCost = 0.5f;
+        private float staminaRegen = 0.6f;
 
         public HeroViewModel(HeroModel model, Transform cameraTransform)
         {
@@ -43,7 +43,14 @@ namespace Hero
                 .AddTo(disposables);
 
             _model.Stamina
-                .Subscribe(stamina => Stamina.Value = Mathf.Clamp(stamina, 0, 100))
+                .Subscribe(stamina => 
+                {
+                    Stamina.Value = Mathf.Clamp(stamina, 0, 100);
+                    if (Stamina.Value <= 0)
+                    {
+                        IsSprinting.Value = false; // Отключаем спринт при 0 выносливости
+                    }
+                })
                 .AddTo(disposables);
 
         }
@@ -102,6 +109,15 @@ namespace Hero
         {
             _model.Health.Value = Mathf.Clamp(_model.Health.Value - damage, 0, 100);
             Debug.Log(_model.Health.Value);
+        }
+
+        public void Run()
+        {
+            if (Stamina.Value > 0)
+            {
+                IsSprinting.Value = true;
+                UseStamina();
+            }
         }
 
         public void Heal(float heal)
