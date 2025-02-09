@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Other;
 using R3;
 
 public class HeroModel
@@ -8,4 +10,6 @@ public class HeroModel
     public ReactiveProperty<float> Speed { get; } = new ReactiveProperty<float>(5f);
     public ReactiveProperty<float> JumpForce { get; } = new ReactiveProperty<float>(5f);
     public ReactiveProperty<bool> IsSprinting { get; } = new ReactiveProperty<bool>(false);
+
+    public ReactiveProperty<List<IItem>> Inventoty { get; } = new();
 }

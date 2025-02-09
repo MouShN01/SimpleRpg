@@ -20,7 +20,7 @@ namespace Hero
             
         }
         
-        void Update()
+        void FixedUpdate()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
