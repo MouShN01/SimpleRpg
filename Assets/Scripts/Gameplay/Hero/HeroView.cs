@@ -1,5 +1,6 @@
 using System;
 using Camera;
+using Other;
 using R3;
 using UnityEngine;
 using Zenject;
@@ -49,6 +50,11 @@ namespace Hero
         public void Heal(float heal)
         {
             _viewModel.Heal(heal);
+        }
+
+        public void TakeItem(IItem item)
+        {
+            _viewModel.GetItem(item);
         }
     }
 }

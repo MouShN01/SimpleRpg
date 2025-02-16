@@ -1,4 +1,8 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using Other;
+using Other.Items;
 using R3;
 using UnityEngine;
 
@@ -12,6 +16,7 @@ namespace Hero
         public ReactiveProperty<Quaternion> Rotation = new(); 
         public ReactiveProperty<bool> IsGrounded = new(true);
         public ReactiveProperty<bool> IsSprinting = new(false);
+        public ReactiveProperty<IEnumerable<IItem>> Inventory { get; } = new();
         
         private readonly CompositeDisposable disposables = new();
         
@@ -51,6 +56,10 @@ namespace Hero
                         IsSprinting.Value = false; // Отключаем спринт при 0 выносливости
                     }
                 })
+                .AddTo(disposables);
+            
+            _model.Inventory
+                .Subscribe(items => Inventory.Value = items)
                 .AddTo(disposables);
 
         }
@@ -134,8 +143,36 @@ namespace Hero
 
         public void RegenerateStamina()
         {
-            _model.Stamina.Value = Mathf.Clamp(_model.Stamina.Value + staminaRegen, 0, 100);
-            Debug.Log(_model.Stamina.Value);
+            if (Stamina.Value < 100)
+            {
+                _model.Stamina.Value = Mathf.Clamp(_model.Stamina.Value + staminaRegen, 0, 100);
+                Debug.Log(_model.Stamina.Value);
+            }
+        }
+
+        public void GetItem(IItem item)
+        {
+            if (_model.Inventory.Value == null)
+            {
+                _model.Inventory.Value = new List<IItem>(); // Безопасная инициализация
+            }
+
+            var updatedInventory = _model.Inventory.Value.ToList();
+
+            var existingItem = updatedInventory.FirstOrDefault(i => i.Name == item.Name && i.IsStackable);
+
+            if (existingItem != null && existingItem is ItemModel baseItem)
+            {
+                baseItem.AddQuantity(item.Quantity);
+                Debug.Log($"Updated: {existingItem.Name} x{existingItem.Quantity}");
+            }
+            else
+            {
+                updatedInventory.Add(item);
+                Debug.Log($"Added: {item.Name} x{item.Quantity}");
+            }
+
+            _model.Inventory.Value = updatedInventory;
         }
 
         public void Dispose()

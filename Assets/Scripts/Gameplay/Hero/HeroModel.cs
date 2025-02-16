@@ -11,5 +11,5 @@ public class HeroModel
     public ReactiveProperty<float> JumpForce { get; } = new ReactiveProperty<float>(5f);
     public ReactiveProperty<bool> IsSprinting { get; } = new ReactiveProperty<bool>(false);
 
-    public ReactiveProperty<List<IItem>> Inventoty { get; } = new();
+    public ReactiveProperty<List<IItem>> Inventory { get; } = new(new List<IItem>());
 }

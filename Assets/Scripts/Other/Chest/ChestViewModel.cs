@@ -9,7 +9,7 @@ namespace Other.Chest
     public class ChestViewModel
     {
         private readonly ChestModel _model;
-        public ReactiveProperty<IEnumerable<IItem>> Items { get;} = new();
+        public ReactiveProperty<IEnumerable<IItem>> Items { get;}
 
         public ChestViewModel(ChestModel model)
         {
@@ -24,7 +24,7 @@ namespace Other.Chest
                 _model.Items.Remove(item);
                 Items.Value = _model.Items.ToList();
 
-                
+                heroViewModel.GetItem(item);
             }
         }
     }

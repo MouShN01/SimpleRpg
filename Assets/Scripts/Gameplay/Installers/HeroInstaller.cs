@@ -1,3 +1,4 @@
+using Camera;
 using Gameplay.UI;
 using Hero;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace Installers
         [SerializeField] private HeroView heroPrefab;
         [SerializeField] private HeroUIView heroUIPrefab;
         [SerializeField] private Transform cameraTransform;
+        
         public override void InstallBindings()
         {
             Container.Bind<HeroModel>().AsSingle();
