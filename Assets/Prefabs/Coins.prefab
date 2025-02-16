@@ -498,7 +498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 831a912bbc484037a32c47505895b47b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toolTip: {fileID: 0}
+  toolTip: {fileID: 4767234557531624204}
 --- !u!1 &4871444029485380486
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,7 +602,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2234603154217942287
 Transform:
   m_ObjectHideFlags: 0
@@ -612,8 +612,8 @@ Transform:
   m_GameObject: {fileID: 5083458682047016697}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.115, y: 0.257, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.115, y: 0.318, z: 0.081}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3150756224130466011}
